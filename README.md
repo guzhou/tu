@@ -1,7 +1,7 @@
-# 本文档说明
+# Document description
 
-使用的是搜狗API搭建的在线外链图床。
+This project uses Sogou Picture Server API to upload your pictures to the Internet for free, so you can use it anywhere.
 
-# 域名说明
+# Domain description
 
-使用的是 js.org 的免费二级域名。
+This service uses the free second-level domain name provided by js.org, and the final interpretation right belongs to js.org.
