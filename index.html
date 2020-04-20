@@ -9,12 +9,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/iguanren/sogou/layui/images/favicon.ico" />
     <meta name="description" content="永久免费图床，支持批量上传，即时预览，不限制流量，不限制外链数，永久保存，搜狗图片服务器，全网CDN图床，高速稳定,支持网页、手机上传，无需插件。支持JPG, GIF, PNG等文件格式。微博图床，围脖是个好图床。">
     <meta name="keywords" content="搜狗图床,图床API,图床,免费图床,CDN图床,淘宝免费图床,淘宝图床,围脖是个好图床,围脖图床,网络图片,图片库,相册,网络相册">
+    <link rel="stylesheet" href="http://hovertree.com/texiao/html5/index/hovertreewelcome.css" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iguanren/sogou/layui/css/layui.css">
     <script src="https://cdn.jsdelivr.net/gh/iguanren/sogou/js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/iguanren/sogou/layui/layui.all.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
 </head>
-<body>
+<body ondragstart="window.event.returnValue=false" oncontextmenu="window.event.returnValue=false" onselectstart="event.returnValue=false">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
   <legend align="center"><a href="/">搜狗图床</a></legend>
 </fieldset>
@@ -78,485 +79,368 @@ document.getElementById('days').innerHTML = number_of_days;
   <source src='https://cdn.jsdelivr.net/gh/iguanren/sogou/layui/so%20weak.mp3' type='audio/mpeg'>
 </audio>
     
-<script type="text/javascript">
-
-// particlesJS('particles-js',
-//   {
-//     "particles": {
-//       "number": {
-//         "value": 110,
-//         "density": {
-//           "enable": true,
-//           "value_area": 800
-//         }
-//       },
-//       "color": {
-//         "value": "#ffffff"
-//       },
-//       "shape": {
-//         "type": "circle",
-//         "stroke": {
-//           "width": 0,
-//           "color": "#000000"
-//         },
-//         "polygon": {
-//           "nb_sides": 5
-//         },
-//         "image": {
-//           "src": "img/github.svg",
-//           "width": 100,
-//           "height": 100
-//         }
-//       },
-//       "opacity": {
-//         "value": 0.5,
-//         "random": false,
-//         "anim": {
-//           "enable": false,
-//           "speed": 1,
-//           "opacity_min": 0.1,
-//           "sync": false
-//         }
-//       },
-//       "size": {
-//         "value": 1,
-//         "random": true,
-//         "anim": {
-//           "enable": false,
-//           "speed": 20,
-//           "size_min": 0.1,
-//           "sync": false
-//         }
-//       },
-//       "line_linked": {
-//         "enable": true,
-//         "distance": 40,
-//         "color": "#fff",
-//         "opacity": 1,
-//         "width": 1
-//       },
-//       "move": {
-//         "enable": true,
-//         "speed": 3,
-//         "direction": "none",
-//         "random": false,
-//         "straight": false,
-//         "out_mode": "out",
-//         "attract": {
-//           "enable": false,
-//           "rotateX": 600,
-//           "rotateY": 1200
-//         }
-//       }
-//     },
-//     "interactivity": {
-//       "detect_on": "canvas",
-//       "events": {
-//         "onhover": {
-//           "enable": true,
-//           "mode": "grab"
-//         },
-//         "onclick": {
-//           "enable": true,
-//           "mode": "push"
-//         },
-//         "resize": true
-//       },
-//       "modes": {
-//         "grab": {
-//           "distance": 120,
-//           "line_linked": {
-//             "opacity": 1
-//           }
-//         },
-//         "bubble": {
-//           "distance": 400,
-//           "size": 40,
-//           "duration": 2,
-//           "opacity": 8,
-//           "speed": 3
-//         },
-//         "repulse": {
-//           "distance": 300
-//         },
-//         "push": {
-//           "particles_nb": 4
-//         },
-//         "remove": {
-//           "particles_nb": 2
-//         }
-//       }
-//     },
-//     "retina_detect": true,
-//     "config_demo": {
-//       "hide_card": false,
-//       "background_color": "#b61924",
-//       "background_image": "",
-//       "background_position": "50% 50%",
-//       "background_repeat": "no-repeat",
-//       "background_size": "cover"
-//     }
-//   }
-
-// );
-
-
-        ; (function (window) {
-
-            var ctx,
-                hue,
-                logo,
-                form,
-                buffer,
-                target = {},
-                tendrils = [],
-                settings = {};
-
-            settings.debug = true;
-            settings.friction = 0.5;
-            settings.trails = 20;
-            settings.size = 50;
-            settings.dampening = 0.25;
-            settings.tension = 0.98;
-
-            Math.TWO_PI = Math.PI * 2;
-
-            // ========================================================================================
-            // Oscillator 何问起
-            // ----------------------------------------------------------------------------------------
-
-            function Oscillator(options) {
-                this.init(options || {});
-            }
-
-            Oscillator.prototype = (function () {
-
-                var value = 0;
-
-                return {
-
-                    init: function (options) {
-                        this.phase = options.phase || 0;
-                        this.offset = options.offset || 0;
-                        this.frequency = options.frequency || 0.001;
-                        this.amplitude = options.amplitude || 1;
-                    },
-
-                    update: function () {
-                        this.phase += this.frequency;
-                        value = this.offset + Math.sin(this.phase) * this.amplitude;
-                        return value;
-                    },
-
-                    value: function () {
-                        return value;
-                    }
-                };
-
-            })();
-
-            // ========================================================================================
-            // Tendril hovertree.com
-            // ----------------------------------------------------------------------------------------
-
-            function Tendril(options) {
-                this.init(options || {});
-            }
-
-            Tendril.prototype = (function () {
-
-                function Node() {
-                    this.x = 0;
-                    this.y = 0;
-                    this.vy = 0;
-                    this.vx = 0;
-                }
-
-                return {
-
-                    init: function (options) {
-
-                        this.spring = options.spring + (Math.random() * 0.1) - 0.05;
-                        this.friction = settings.friction + (Math.random() * 0.01) - 0.005;
-                        this.nodes = [];
-
-                        for (var i = 0, node; i < settings.size; i++) {
-
-                            node = new Node();
-                            node.x = target.x;
-                            node.y = target.y;
-
-                            this.nodes.push(node);
-                        }
-                    },
-
-                    update: function () {
-
-                        var spring = this.spring,
-                            node = this.nodes[0];
-
-                        node.vx += (target.x - node.x) * spring;
-                        node.vy += (target.y - node.y) * spring;
-
-                        for (var prev, i = 0, n = this.nodes.length; i < n; i++) {
-
-                            node = this.nodes[i];
-
-                            if (i > 0) {
-
-                                prev = this.nodes[i - 1];
-
-                                node.vx += (prev.x - node.x) * spring;
-                                node.vy += (prev.y - node.y) * spring;
-                                node.vx += prev.vx * settings.dampening;
-                                node.vy += prev.vy * settings.dampening;
-                            }
-
-                            node.vx *= this.friction;
-                            node.vy *= this.friction;
-                            node.x += node.vx;
-                            node.y += node.vy;
-
-                            spring *= settings.tension;
-                        }
-                    },
-
-                    draw: function () {
-
-                        var x = this.nodes[0].x,
-                            y = this.nodes[0].y,
-                            a, b;
-
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
-
-                        for (var i = 1, n = this.nodes.length - 2; i < n; i++) {
-
-                            a = this.nodes[i];
-                            b = this.nodes[i + 1];
-                            x = (a.x + b.x) * 0.5;
-                            y = (a.y + b.y) * 0.5;
-
-                            ctx.quadraticCurveTo(a.x, a.y, x, y);
-                        }
-
-                        a = this.nodes[i];
-                        b = this.nodes[i + 1];
-
-                        ctx.quadraticCurveTo(a.x, a.y, b.x, b.y);
-                        ctx.stroke();
-                        ctx.closePath();
-                    }
-                };
-
-            })();
-
-            // ----------------------------------------------------------------------------------------
-
-            function init(event) {
-
-                document.removeEventListener('mousemove', init);
-                document.removeEventListener('touchstart', init);
-
-                document.addEventListener('mousemove', mousemove);
-                document.addEventListener('touchmove', mousemove);
-                document.addEventListener('touchstart', touchstart);
-
-                mousemove(event);
-                reset();
-                loop();
-            }
-
-            function reset() {
-
-                tendrils = [];
-
-                for (var i = 0; i < settings.trails; i++) {
-
-                    tendrils.push(new Tendril({
-                        spring: 0.45 + 0.025 * (i / settings.trails)
-                    }));
-                }
-            }
-
-            function loop() {
-
-                if (!ctx.running) return;
-
-                ctx.globalCompositeOperation = 'source-over';
-                ctx.fillStyle = 'rgba(8,5,16,0.4)';
-                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-                ctx.globalCompositeOperation = 'lighter';
-                ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
-                ctx.lineWidth = 1;
-
-                if (ctx.frame % 60 == 0) {
-                    console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency, hue.amplitude);
-                }
-
-                for (var i = 0, tendril; i < settings.trails; i++) {
-                    tendril = tendrils[i];
-                    tendril.update();
-                    tendril.draw();
-                }
-
-                ctx.frame++;
-                ctx.stats.update();
-                requestAnimFrame(loop);
-            }
-
-            function resize() {
-                ctx.canvas.width = window.innerWidth;
-                ctx.canvas.height = window.innerHeight;
-            }
-
-            function start() {
-                if (!ctx.running) {
-                    ctx.running = true;
-                    loop();
-                }
-            }
-
-            function stop() {
-                ctx.running = false;
-            }
-
-            function mousemove(event) {
-                if (event.touches) {
-                    target.x = event.touches[0].pageX;
-                    target.y = event.touches[0].pageY;
-                } else {
-                    target.x = event.clientX
-                    target.y = event.clientY;
-                }
-                event.preventDefault();
-            }
-
-            function touchstart(event) {
-                if (event.touches.length == 1) {
-                    target.x = event.touches[0].pageX;
-                    target.y = event.touches[0].pageY;
-                }
-            }
-
-            function keyup(event) {
-
-                switch (event.keyCode) {
-                    case 32:
-                        save();
-                        break;
-                    default:
-                        // console.log(event.keyCode); hovertree.com
-                }
-            }
-
-            function letters(id) {
-
-                var el = document.getElementById(id),
-                    letters = el.innerHTML.replace('&amp;', '&').split(''),
-                    heading = '';
-
-                for (var i = 0, n = letters.length, letter; i < n; i++) {
-                    letter = letters[i].replace('&', '&amp');
-                    heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
-                }
-
-                el.innerHTML = heading;
-                setTimeout(function () {
-                    el.className = 'transition-in';
-                }, (Math.random() * 500) + 500);
-            }
-
-            function save() {
-
-                if (!buffer) {
-
-                    buffer = document.createElement('canvas');
-                    buffer.width = screen.availWidth;
-                    buffer.height = screen.availHeight;
-                    buffer.ctx = buffer.getContext('2d');
-
-                    form = document.createElement('form');
-                    form.method = 'post';
-                    form.input = document.createElement('input');
-                    form.input.type = 'hidden';
-                    form.input.name = 'data';
-                    form.appendChild(form.input);
-
-                    document.body.appendChild(form);
-                }
-
-                buffer.ctx.fillStyle = 'rgba(8,5,16)';
-                buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
-
-                buffer.ctx.drawImage(canvas,
-                    Math.round(buffer.width / 2 - canvas.width / 2),
-                    Math.round(buffer.height / 2 - canvas.height / 2)
-                );
-
-                buffer.ctx.drawImage(logo,
-                    Math.round(buffer.width / 2 - logo.width / 4),
-                    Math.round(buffer.height / 2 - logo.height / 4),
-                    logo.width / 2,
-                    logo.height / 2
-                );
-
-                window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
-
-                // form.input.value = buffer.toDataURL().substr(22);
-                // form.submit(); hovertree.com
-            }
-
-            window.requestAnimFrame = (function () {
-                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (fn) { window.setTimeout(fn, 1000 / 60) };
-            })();
-
-            window.onload = function () {
-
-                ctx = document.getElementById('canvas').getContext('2d');
-                ctx.stats = new Stats();
-                ctx.running = true;
-                ctx.frame = 1;
-
-               
-
-                hue = new Oscillator({
-                    phase: Math.random() * Math.TWO_PI,
-                    amplitude: 85,
-                    frequency: 0.0015,
-                    offset: 285
-                });
-
-             
-
-                document.addEventListener('mousemove', init);
-                document.addEventListener('touchstart', init);
-                document.body.addEventListener('orientationchange', resize);
-                window.addEventListener('resize', resize);
-                window.addEventListener('keyup', keyup);
-                window.addEventListener('focus', start);
-                window.addEventListener('blur', stop);
-
-                resize();
-
-                if (window.DEBUG) {
-
-                    var gui = new dat.GUI();
-
-                    // gui.add(settings, 'debug');
-                    settings.gui.add(settings, 'trails', 1, 30).onChange(reset);
-                    settings.gui.add(settings, 'size', 25, 75).onFinishChange(reset);
-                    settings.gui.add(settings, 'friction', 0.45, 0.55).onFinishChange(reset);
-                    settings.gui.add(settings, 'dampening', 0.01, 0.4).onFinishChange(reset);
-                    settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
-
-                    document.body.appendChild(ctx.stats.domElement);
-                }
-            };
-
-        })(window);
-
-    </script>
+<script type="text/javascript" src="http://hovertree.com/texiao/html5/index/hovertreewelcome.js">
+ 34 </script>
+ 35 <script type="text/javascript">
+ 36 
+ 37 ; (function (window) {
+ 38 
+ 39 var ctx,
+ 40 hue,
+ 41 logo,
+ 42 form,
+ 43 buffer,
+ 44 target = {},
+ 45 tendrils = [],
+ 46 settings = {};
+ 47 
+ 48 settings.debug = true;
+ 49 settings.friction = 0.5;
+ 50 settings.trails = 20;
+ 51 settings.size = 50;
+ 52 settings.dampening = 0.25;
+ 53 settings.tension = 0.98;
+ 54 
+ 55 Math.TWO_PI = Math.PI * 2;
+ 56 
+ 57 // ========================================================================================
+ 58 // Oscillator 何问起
+ 59 // ----------------------------------------------------------------------------------------
+ 60 
+ 61 function Oscillator(options) {
+ 62 this.init(options || {});
+ 63 }
+ 64 
+ 65 Oscillator.prototype = (function () {
+ 66 
+ 67 var value = 0;
+ 68 
+ 69 return {
+ 70 
+ 71 init: function (options) {
+ 72 this.phase = options.phase || 0;
+ 73 this.offset = options.offset || 0;
+ 74 this.frequency = options.frequency || 0.001;
+ 75 this.amplitude = options.amplitude || 1;
+ 76 },
+ 77 
+ 78 update: function () {
+ 79 this.phase += this.frequency;
+ 80 value = this.offset + Math.sin(this.phase) * this.amplitude;
+ 81 return value;
+ 82 },
+ 83 
+ 84 value: function () {
+ 85 return value;
+ 86 }
+ 87 };
+ 88 
+ 89 })();
+ 90 
+ 91 // ========================================================================================
+ 92 // Tendril hovertree.com
+ 93 // ----------------------------------------------------------------------------------------
+ 94 
+ 95 function Tendril(options) {
+ 96 this.init(options || {});
+ 97 }
+ 98 
+ 99 Tendril.prototype = (function () {
+100 
+101 function Node() {
+102 this.x = 0;
+103 this.y = 0;
+104 this.vy = 0;
+105 this.vx = 0;
+106 }
+107 
+108 return {
+109 
+110 init: function (options) {
+111 
+112 this.spring = options.spring + (Math.random() * 0.1) - 0.05;
+113 this.friction = settings.friction + (Math.random() * 0.01) - 0.005;
+114 this.nodes = [];
+115 
+116 for (var i = 0, node; i < settings.size; i++) {
+117 
+118 node = new Node();
+119 node.x = target.x;
+120 node.y = target.y;
+121 
+122 this.nodes.push(node);
+123 }
+124 },
+125 
+126 update: function () {
+127 
+128 var spring = this.spring,
+129 node = this.nodes[0];
+130 
+131 node.vx += (target.x - node.x) * spring;
+132 node.vy += (target.y - node.y) * spring;
+133 
+134 for (var prev, i = 0, n = this.nodes.length; i < n; i++) {
+135 
+136 node = this.nodes[i];
+137 
+138 if (i > 0) {
+139 
+140 prev = this.nodes[i - 1];
+141 
+142 node.vx += (prev.x - node.x) * spring;
+143 node.vy += (prev.y - node.y) * spring;
+144 node.vx += prev.vx * settings.dampening;
+145 node.vy += prev.vy * settings.dampening;
+146 }
+147 
+148 node.vx *= this.friction;
+149 node.vy *= this.friction;
+150 node.x += node.vx;
+151 node.y += node.vy;
+152 
+153 spring *= settings.tension;
+154 }
+155 },
+156 
+157 draw: function () {
+158 
+159 var x = this.nodes[0].x,
+160 y = this.nodes[0].y,
+161 a, b;
+162 
+163 ctx.beginPath();
+164 ctx.moveTo(x, y);
+165 
+166 for (var i = 1, n = this.nodes.length - 2; i < n; i++) {
+167 
+168 a = this.nodes[i];
+169 b = this.nodes[i + 1];
+170 x = (a.x + b.x) * 0.5;
+171 y = (a.y + b.y) * 0.5;
+172 
+173 ctx.quadraticCurveTo(a.x, a.y, x, y);
+174 }
+175 
+176 a = this.nodes[i];
+177 b = this.nodes[i + 1];
+178 
+179 ctx.quadraticCurveTo(a.x, a.y, b.x, b.y);
+180 ctx.stroke();
+181 ctx.closePath();
+182 }
+183 };
+184 
+185 })();
+186 
+187 // ----------------------------------------------------------------------------------------
+188 
+189 function init(event) {
+190 
+191 document.removeEventListener('mousemove', init);
+192 document.removeEventListener('touchstart', init);
+193 
+194 document.addEventListener('mousemove', mousemove);
+195 document.addEventListener('touchmove', mousemove);
+196 document.addEventListener('touchstart', touchstart);
+197 
+198 mousemove(event);
+199 reset();
+200 loop();
+201 }
+202 
+203 function reset() {
+204 
+205 tendrils = [];
+206 
+207 for (var i = 0; i < settings.trails; i++) {
+208 
+209 tendrils.push(new Tendril({
+210 spring: 0.45 + 0.025 * (i / settings.trails)
+211 }));
+212 }
+213 }
+214 
+215 function loop() {
+216 
+217 if (!ctx.running) return;
+218 
+219 ctx.globalCompositeOperation = 'source-over';
+220 ctx.fillStyle = 'rgba(8,5,16,0.4)';
+221 ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+222 ctx.globalCompositeOperation = 'lighter';
+223 ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
+224 ctx.lineWidth = 1;
+225 
+226 if (ctx.frame % 60 == 0) {
+227 console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency, hue.amplitude);
+228 }
+229 
+230 for (var i = 0, tendril; i < settings.trails; i++) {
+231 tendril = tendrils[i];
+232 tendril.update();
+233 tendril.draw();
+234 }
+235 
+236 ctx.frame++;
+237 ctx.stats.update();
+238 requestAnimFrame(loop);
+239 }
+240 
+241 function resize() {
+242 ctx.canvas.width = window.innerWidth;
+243 ctx.canvas.height = window.innerHeight;
+244 }
+245 
+246 function start() {
+247 if (!ctx.running) {
+248 ctx.running = true;
+249 loop();
+250 }
+251 }
+252 
+253 function stop() {
+254 ctx.running = false;
+255 }
+256 
+257 function mousemove(event) {
+258 if (event.touches) {
+259 target.x = event.touches[0].pageX;
+260 target.y = event.touches[0].pageY;
+261 } else {
+262 target.x = event.clientX
+263 target.y = event.clientY;
+264 }
+265 event.preventDefault();
+266 }
+267 
+268 function touchstart(event) {
+269 if (event.touches.length == 1) {
+270 target.x = event.touches[0].pageX;
+271 target.y = event.touches[0].pageY;
+272 }
+273 }
+274 
+275 function keyup(event) {
+276 
+277 switch (event.keyCode) {
+278 case 32:
+279 save();
+280 break;
+281 default:
+282 // console.log(event.keyCode); hovertree.com
+283 }
+284 }
+285 
+286 function letters(id) {
+287 
+288 var el = document.getElementById(id),
+289 letters = el.innerHTML.replace('&amp;', '&').split(''),
+290 heading = '';
+291 
+292 for (var i = 0, n = letters.length, letter; i < n; i++) {
+293 letter = letters[i].replace('&', '&amp');
+294 heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
+295 }
+296 
+297 el.innerHTML = heading;
+298 setTimeout(function () {
+299 el.className = 'transition-in';
+300 }, (Math.random() * 500) + 500);
+301 }
+302 
+303 function save() {
+304 
+305 if (!buffer) {
+306 
+307 buffer = document.createElement('canvas');
+308 buffer.width = screen.availWidth;
+309 buffer.height = screen.availHeight;
+310 buffer.ctx = buffer.getContext('2d');
+311 
+312 form = document.createElement('form');
+313 form.method = 'post';
+314 form.input = document.createElement('input');
+315 form.input.type = 'hidden';
+316 form.input.name = 'data';
+317 form.appendChild(form.input);
+318 
+319 document.body.appendChild(form);
+320 }
+321 
+322 buffer.ctx.fillStyle = 'rgba(8,5,16)';
+323 buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
+324 
+325 buffer.ctx.drawImage(canvas,
+326 Math.round(buffer.width / 2 - canvas.width / 2),
+327 Math.round(buffer.height / 2 - canvas.height / 2)
+328 );
+329 
+330 buffer.ctx.drawImage(logo,
+331 Math.round(buffer.width / 2 - logo.width / 4),
+332 Math.round(buffer.height / 2 - logo.height / 4),
+333 logo.width / 2,
+334 logo.height / 2
+335 );
+336 
+337 window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
+338 
+339 // form.input.value = buffer.toDataURL().substr(22);
+340 // form.submit(); hovertree.com
+341 }
+342 
+343 window.requestAnimFrame = (function () {
+344 return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (fn) { window.setTimeout(fn, 1000 / 60) };
+345 })();
+346 
+347 window.onload = function () {
+348 
+349 ctx = document.getElementById('canvas').getContext('2d');
+350 ctx.stats = new Stats();
+351 ctx.running = true;
+352 ctx.frame = 1;
+353 
+354 logo = new Image();
+355 logo.src = 'ht' + 'tp://ho' + 'vertree.c' + 'om/themes/hvtimages/hvtlogo.p' + 'ng';
+356 
+357 hue = new Oscillator({
+358 phase: Math.random() * Math.TWO_PI,
+359 amplitude: 85,
+360 frequency: 0.0015,
+361 offset: 285
+362 });
+363 
+364 letters('h1');
+365 letters('h2');
+366 
+367 document.addEventListener('mousemove', init);
+368 document.addEventListener('touchstart', init);
+369 document.body.addEventListener('orientationchange', resize);
+370 window.addEventListener('resize', resize);
+371 window.addEventListener('keyup', keyup);
+372 window.addEventListener('focus', start);
+373 window.addEventListener('blur', stop);
+374 
+375 resize();
+376 
+377 if (window.DEBUG) {
+378 
+379 var gui = new dat.GUI();
+380 
+381 // gui.add(settings, 'debug');
+382 settings.gui.add(settings, 'trails', 1, 30).onChange(reset);
+383 settings.gui.add(settings, 'size', 25, 75).onFinishChange(reset);
+384 settings.gui.add(settings, 'friction', 0.45, 0.55).onFinishChange(reset);
+385 settings.gui.add(settings, 'dampening', 0.01, 0.4).onFinishChange(reset);
+386 settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
+387 
+388 document.body.appendChild(ctx.stats.domElement);
+389 }
+390 };
+391 
+392 })(window);
+393 
+394 </script>
     
 </body>
 </html>
