@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/gh/iguanren/sogou/js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/iguanren/sogou/layui/layui.all.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript" src="http://hovertree.com/texiao/html5/index/hovertreewelcome.js">
 </head>
 <body ondragstart="window.event.returnValue=false" oncontextmenu="window.event.returnValue=false" onselectstart="event.returnValue=false">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
@@ -80,13 +81,9 @@ document.getElementById('days').innerHTML = number_of_days;
 </audio>
     
 <canvas id="canvas"></canvas>
-
-<script type="text/javascript" src="http://hovertree.com/texiao/html5/index/hovertreewelcome.js">
 </script>
 <script type="text/javascript">
-
 ; (function (window) {
-
 var ctx,
 hue,
 logo,
@@ -95,7 +92,6 @@ buffer,
 target = {},
 tendrils = [],
 settings = {};
-
 settings.debug = true;
 settings.friction = 0.5;
 settings.trails = 20;
@@ -104,10 +100,6 @@ settings.dampening = 0.25;
 settings.tension = 0.98;
 
 Math.TWO_PI = Math.PI * 2;
-
-// ========================================================================================
-// Oscillator 何问起
-// ----------------------------------------------------------------------------------------
 
 function Oscillator(options) {
 this.init(options || {});
@@ -138,10 +130,6 @@ return value;
 };
 
 })();
-
-// ========================================================================================
-// Tendril hovertree.com
-// ----------------------------------------------------------------------------------------
 
 function Tendril(options) {
 this.init(options || {});
@@ -234,8 +222,6 @@ ctx.closePath();
 };
 
 })();
-
-// ----------------------------------------------------------------------------------------
 
 function init(event) {
 
@@ -330,7 +316,6 @@ case 32:
 save();
 break;
 default:
-// console.log(event.keyCode); hovertree.com
 }
 }
 
@@ -387,8 +372,6 @@ logo.height / 2
 
 window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
 
-// form.input.value = buffer.toDataURL().substr(22);
-// form.submit(); hovertree.com
 }
 
 window.requestAnimFrame = (function () {
@@ -429,7 +412,6 @@ if (window.DEBUG) {
 
 var gui = new dat.GUI();
 
-// gui.add(settings, 'debug');
 settings.gui.add(settings, 'trails', 1, 30).onChange(reset);
 settings.gui.add(settings, 'size', 25, 75).onFinishChange(reset);
 settings.gui.add(settings, 'friction', 0.45, 0.55).onFinishChange(reset);
